@@ -67,7 +67,7 @@ namespace Space_Cats_V1._2
                                                     this.z_viewportRec.Height - 80);
 
             //Create the player ship
-            this.z_playerShip = PlayerShip.getInstance(this.z_contentManager.Load<Texture2D>("Content\\Images\\ship2"), 
+            this.z_playerShip = PlayerShip.getInstance(this.z_contentManager.Load<Texture2D>("Content\\Images\\ship1"), 
                                                this.z_startingPosition);
 
             //Set the player alive

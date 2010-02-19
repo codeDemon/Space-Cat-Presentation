@@ -107,7 +107,7 @@ namespace Space_Cats_V1._2
                             && previousKeyboardState.IsKeyUp(Keys.Up))
                         {
                             this.z_currentState = TitleState.Options;
-                            this.z_arrow.setPosition(new Vector2((float)((this.z_viewPort.Width / 2) - 170), (float)(this.z_viewPort.Height / 2)+125));
+                            this.z_arrow.setPosition(new Vector2((float)((this.z_viewPort.Width / 2) - 200), (float)(this.z_viewPort.Height / 2)+125));
                         }
                         break;
                     }
@@ -117,13 +117,13 @@ namespace Space_Cats_V1._2
                             && previousKeyboardState.IsKeyUp(Keys.Up))
                         {
                             this.z_currentState = TitleState.Exit;
-                            this.z_arrow.setPosition(new Vector2((float)((this.z_viewPort.Width / 2) - 170), (float)(this.z_viewPort.Height / 2)+190));
+                            this.z_arrow.setPosition(new Vector2((float)((this.z_viewPort.Width / 2) - 200), (float)(this.z_viewPort.Height / 2)+190));
                         }
                         else if (previousKeyboardState.IsKeyUp(Keys.Down) && currentKeyboardState.IsKeyDown(Keys.Up)
                                 && previousKeyboardState.IsKeyUp(Keys.Up))
                         {
                             this.z_currentState = TitleState.Start;
-                            this.z_arrow.setPosition(new Vector2((float)((this.z_viewPort.Width / 2) - 170), (float)(this.z_viewPort.Height / 2)+50));
+                            this.z_arrow.setPosition(new Vector2((float)((this.z_viewPort.Width / 2) - 200), (float)(this.z_viewPort.Height / 2)+50));
                         }
                         break;
                     }
@@ -133,7 +133,7 @@ namespace Space_Cats_V1._2
                                 && previousKeyboardState.IsKeyUp(Keys.Up))
                         {
                             this.z_currentState = TitleState.Options;
-                            this.z_arrow.setPosition(new Vector2((float)((this.z_viewPort.Width / 2) - 170), (float)(this.z_viewPort.Height / 2)+125));
+                            this.z_arrow.setPosition(new Vector2((float)((this.z_viewPort.Width / 2) - 200), (float)(this.z_viewPort.Height / 2)+125));
                         }
                         break;
                     }
@@ -199,11 +199,11 @@ namespace Space_Cats_V1._2
         //Required Load Method
         public void loadTexture(ContentManager content)
         {
-            this.z_logo = content.Load<Texture2D>("Content\\Screens\\LogoScreen");
+            this.z_logo = content.Load<Texture2D>("Content\\Screens\\LogoScreen2");
             this.z_options = content.Load<Texture2D>("Content\\Screens\\TitleOptions3");
-            this.z_arrow = new GameObject(content.Load<Texture2D>("Content\\Screens\\ArrowSelection"));
+            this.z_arrow = new GameObject(content.Load<Texture2D>("Content\\Screens\\ArrowSelection2"));
             //Try to fiqure the starting position for arrow ^^
-            this.z_arrow.setPosition(new Vector2((float)((this.z_viewPort.Width / 2) - 170), (float)(this.z_viewPort.Height / 2)+50));
+            this.z_arrow.setPosition(new Vector2((float)((this.z_viewPort.Width / 2) - 200), (float)(this.z_viewPort.Height / 2)+50));
             this.z_isLoaded = true;
         }
 

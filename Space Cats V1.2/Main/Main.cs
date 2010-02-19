@@ -79,7 +79,7 @@ namespace Space_Cats_V1._2
             //this.z_graphics.PreferredBackBufferWidth = 1280;
             //this.z_graphics.PreferredBackBufferHeight = 720;
 
-            //this.z_graphics.IsFullScreen = true;
+            this.z_graphics.IsFullScreen = true;
             this.z_graphics.SynchronizeWithVerticalRetrace = true;
 
             Content.RootDirectory = "Content";

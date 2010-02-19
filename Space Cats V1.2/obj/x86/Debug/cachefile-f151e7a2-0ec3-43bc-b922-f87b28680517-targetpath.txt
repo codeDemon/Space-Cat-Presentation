@@ -53,3 +53,10 @@ Content\Screens\MissionMenus\MissionMenu3.xnb
 Content\Screens\MissionMenus\MissionMenu4.xnb
 Content\Screens\MissionMenus\MissionMenu5.xnb
 Content\Screens\MissionMenus\MissionMenu6.xnb
+Content\Images\Asteroids\Asteroid6.xnb
+Content\Images\Asteroids\Asteroid7.xnb
+Content\Images\Asteroids\Asteroid8.xnb
+Content\Images\Asteroids\Asteroid9.xnb
+Content\Images\ship1.xnb
+Content\Screens\LogoScreen2.xnb
+Content\Screens\ArrowSelection2.xnb

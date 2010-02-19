@@ -120,3 +120,10 @@ C:\Users\David\Desktop\codeDemon-Space-Cat-GameStateManager-b1126fc\codeDemon-Sp
 C:\Users\David\Desktop\codeDemon-Space-Cat-GameStateManager-b1126fc\codeDemon-Space-Cat-GameStateManager-b1126fc\Space Cats V1.2\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\David\Desktop\codeDemon-Space-Cat-GameStateManager-b1126fc\codeDemon-Space-Cat-GameStateManager-b1126fc\Space Cats V1.2\obj\x86\Debug\Space Cats V1.2.exe
 C:\Users\David\Desktop\codeDemon-Space-Cat-GameStateManager-b1126fc\codeDemon-Space-Cat-GameStateManager-b1126fc\Space Cats V1.2\obj\x86\Debug\Space Cats V1.2.pdb
+C:\Users\David\Desktop\codeDemon-Space-Cat-GameStateManager-b1126fc\codeDemon-Space-Cat-GameStateManager-b1126fc\Space Cats V1.2\bin\x86\Debug\Content\Images\Asteroids\Asteroid6.xnb
+C:\Users\David\Desktop\codeDemon-Space-Cat-GameStateManager-b1126fc\codeDemon-Space-Cat-GameStateManager-b1126fc\Space Cats V1.2\bin\x86\Debug\Content\Images\Asteroids\Asteroid7.xnb
+C:\Users\David\Desktop\codeDemon-Space-Cat-GameStateManager-b1126fc\codeDemon-Space-Cat-GameStateManager-b1126fc\Space Cats V1.2\bin\x86\Debug\Content\Images\Asteroids\Asteroid8.xnb
+C:\Users\David\Desktop\codeDemon-Space-Cat-GameStateManager-b1126fc\codeDemon-Space-Cat-GameStateManager-b1126fc\Space Cats V1.2\bin\x86\Debug\Content\Images\Asteroids\Asteroid9.xnb
+C:\Users\David\Desktop\codeDemon-Space-Cat-GameStateManager-b1126fc\codeDemon-Space-Cat-GameStateManager-b1126fc\Space Cats V1.2\bin\x86\Debug\Content\Images\ship1.xnb
+C:\Users\David\Desktop\codeDemon-Space-Cat-GameStateManager-b1126fc\codeDemon-Space-Cat-GameStateManager-b1126fc\Space Cats V1.2\bin\x86\Debug\Content\Screens\LogoScreen2.xnb
+C:\Users\David\Desktop\codeDemon-Space-Cat-GameStateManager-b1126fc\codeDemon-Space-Cat-GameStateManager-b1126fc\Space Cats V1.2\bin\x86\Debug\Content\Screens\ArrowSelection2.xnb

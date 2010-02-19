@@ -66,8 +66,8 @@ namespace Space_Cats_V1._2
             this.z_maxStartingWidth = (float)this.z_viewPort.Width;
             this.z_minRotationSpeed = 0.01f;
             this.z_maxRotationSpeed = 0.05f;
-            this.z_minImage = 1;
-            this.z_maxImage = 5;
+            this.z_minImage = 6;
+            this.z_maxImage = 9;
             this.z_randomGenerator = new Random();
             this.z_content = content;
             this.z_spriteBatch = spriteBatch;
