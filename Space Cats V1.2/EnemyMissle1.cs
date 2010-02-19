@@ -13,16 +13,16 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace Space_Cats_V1._2
 {
-    class PlayerMissle1 : MissleObject
+    class EnemyMissle1 : MissleObject
     {
         //Instance Variables ---------------------------------------------------------
         private bool isAvailable;
 
         //Constructor ----------------------------------------------------------------
-        public PlayerMissle1(Texture2D MissleSprite, Vector2 playersLocation, SpriteBatch spriteBatch)
+        public EnemyMissle1(Texture2D MissleSprite, Vector2 playersLocation, SpriteBatch spriteBatch)
             : base(MissleSprite, playersLocation, spriteBatch)
         {
-            this.setVelocity(new Vector2(0, -1));
+            this.setVelocity(new Vector2(0, 1));
             this.setSpeed(5);
             this.setIsAlive(true);
             this.isAvailable = true;
@@ -41,12 +41,6 @@ namespace Space_Cats_V1._2
         }
 
         //Other Methods --------------------------------------------------------------
-
-
-
-
-
-
 
 
 

@@ -64,6 +64,7 @@ namespace Space_Cats_V1._2
         private AudioManager z_audioManager;
         private UltimateManager z_ultimateManager;
         private KeyboardState z_previousKeyboardState = Keyboard.GetState();
+        private GamePadState z_previousGamePadState = GamePad.GetState(PlayerIndex.One);
 
 
 
@@ -75,10 +76,10 @@ namespace Space_Cats_V1._2
         {
             this.z_graphics = new GraphicsDeviceManager(this);
             this.z_audioManager = new AudioManager(this);
-            this.z_graphics.PreferredBackBufferWidth = 1280;
-            this.z_graphics.PreferredBackBufferHeight = 720;
+            //this.z_graphics.PreferredBackBufferWidth = 1280;
+            //this.z_graphics.PreferredBackBufferHeight = 720;
 
-            this.z_graphics.IsFullScreen = true;
+            //this.z_graphics.IsFullScreen = true;
             this.z_graphics.SynchronizeWithVerticalRetrace = true;
 
             Content.RootDirectory = "Content";
@@ -208,10 +209,12 @@ namespace Space_Cats_V1._2
         protected override void Update(GameTime gameTime)
         {
             KeyboardState currentKeyboardState = Keyboard.GetState();
+            GamePadState currentGamePadState = GamePad.GetState(PlayerIndex.One);
             if(this.z_contentManager != null)
-                this.z_ultimateManager.Update(currentKeyboardState, this.z_previousKeyboardState, gameTime, this.z_contentManager);
+                this.z_ultimateManager.Update(currentKeyboardState, this.z_previousKeyboardState, gameTime, this.z_contentManager, currentGamePadState, this.z_previousGamePadState);
 
             this.z_previousKeyboardState = currentKeyboardState;
+            this.z_previousGamePadState = currentGamePadState;
             base.Update(gameTime);
         }
 

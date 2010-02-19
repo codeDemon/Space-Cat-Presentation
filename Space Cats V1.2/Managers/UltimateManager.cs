@@ -60,7 +60,8 @@ namespace Space_Cats_V1._2
 
 
         //Update Method
-        public void Update(KeyboardState currentKey, KeyboardState previousKey, GameTime gameTime, ContentManager content)
+        public void Update(KeyboardState currentKey, KeyboardState previousKey, GameTime gameTime, ContentManager content,
+                            GamePadState currentPad, GamePadState previousPad)
         {
             if (!this.z_loadingManager.getInitialLoadFinished())
             {
@@ -73,7 +74,7 @@ namespace Space_Cats_V1._2
                 if (this.z_gameStateManager.getLoadingManagerIsActive())
                     this.z_gameStateManager.setLoadingManagerIsActive(false);
             }
-            this.z_gameStateManager.UpdateKeyBoard(currentKey, previousKey, gameTime);
+            this.z_gameStateManager.UpdateKeyBoard(currentKey, previousKey, gameTime, currentPad, previousPad);
 
         }
 

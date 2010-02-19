@@ -28,7 +28,7 @@ namespace Space_Cats_V1._2
             this.z_content = content;
             this.z_viewPort = viewPort;
             this.z_EnemyPool = new List<Enemy1>();
-            this.z_image = z_content.Load<Texture2D>("Images\\EnemyShips\\EnemyShip1");
+            this.z_image = z_content.Load<Texture2D>("Content\\Images\\EnemyShips\\EnemyShip1");
 
             for (int i = 0; i < 100; i++)
             {

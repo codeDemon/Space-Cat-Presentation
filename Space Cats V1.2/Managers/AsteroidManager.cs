@@ -70,7 +70,6 @@ namespace Space_Cats_V1._2
             this.z_maxImage = 5;
             this.z_randomGenerator = new Random();
             this.z_content = content;
-            this.z_content.RootDirectory = "Content";
             this.z_spriteBatch = spriteBatch;
             
 
@@ -136,7 +135,7 @@ namespace Space_Cats_V1._2
             for (int i = 0; i < this.z_asteroidHolder.Length; i++)
             {
                 this.z_asteroidHolder[i] = new Asteroid(z_content.Load<Texture2D>
-                                                        ("Images\\Asteroids\\Asteroid" + this.getRandomImage()));
+                                                        ("Content\\Images\\Asteroids\\Asteroid" + this.getRandomImage()));
                 this.z_asteroidHolder[i].setPosition(new Vector2(this.getRandomWidth(), this.getRandomHeight()));
                 this.z_asteroidHolder[i].setSpeed(this.getRandomSpeed());
                 this.z_asteroidHolder[i].setRotationSpeed(this.getRandomRotationSpeed());
@@ -168,7 +167,7 @@ namespace Space_Cats_V1._2
                     //Not sure if reloading a new image for each asteroid is a good idea
                     //Might cause game lag**
                     asteroid.setSprite(z_content.Load<Texture2D>
-                                       ("Images\\Asteroids\\Asteroid" + this.getRandomImage()));
+                                       ("Content\\Images\\Asteroids\\Asteroid" + this.getRandomImage()));
                     asteroid.setPosition(new Vector2(this.getRandomWidth(), this.getRandomHeight()));
                     asteroid.setSpeed(this.getRandomSpeed());
                     //Because The rotation is perfectly centered, asteroids that move slow look really

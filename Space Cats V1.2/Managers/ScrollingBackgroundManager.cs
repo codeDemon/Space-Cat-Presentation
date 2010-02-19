@@ -22,12 +22,28 @@ namespace Space_Cats_V1._2
         private Rectangle z_viewPort;
 
         //Constructor
-        public ScrollingBackgroundManager(Texture2D background, Rectangle viewPort)
+        public ScrollingBackgroundManager(Rectangle viewPort)
         {
             this.z_viewPort = viewPort;
-            this.z_backgroundImage1 = new ScrollingBackground(background);
-            this.z_backgroundImage2 = new ScrollingBackground(background);
+            this.z_backgroundImage1 = null;
+            this.z_backgroundImage2 = null;
         }
+
+
+        public void loadImage1(Texture2D image)
+        {
+            this.z_backgroundImage1 = new ScrollingBackground(image);
+            this.z_backgroundImage1.setPosition(new Vector2(0f, 0f));
+            this.z_backgroundImage1.setIsAlive(true);
+        }
+
+        public void loadImage2(Texture2D image)
+        {
+            this.z_backgroundImage2 = new ScrollingBackground(image);
+            this.z_backgroundImage2.setPosition(new Vector2(0f, 0f - this.z_viewPort.Height));
+            this.z_backgroundImage2.setIsAlive(true);
+        }
+
 
         //Update Method
         public void Update()
@@ -61,6 +77,8 @@ namespace Space_Cats_V1._2
         //Draw Method
         public void Draw(SpriteBatch spriteBatch)
         {
+            if (this.z_backgroundImage1 == null || this.z_backgroundImage2 == null)
+                return;
             //Draw Background images
             if (this.z_backgroundImage1.getIsAlive())
                 spriteBatch.Draw(this.z_backgroundImage1.getSprite(), this.z_backgroundImage1.getPosition(), null,

@@ -27,7 +27,7 @@ namespace Space_Cats_V1._2
         private SpriteBatch z_spriteBatch;
         private Rectangle z_viewPort;
         //Create a pool of enemy images already loaded
-        private EnemyPool1 z_enemyPool1;
+        private EnemyPool1 z_poolEnemy1;
         //A counter for the Update Method
         private float z_counter;
         //another counter for spreading out the enemies as they spawn
@@ -39,23 +39,24 @@ namespace Space_Cats_V1._2
         private bool z_ActivateE1W1;
         private bool z_ActivateE1W2;
         private bool z_ActivateE1W3;
+        private PlayerShip playerShip = PlayerShip.getInstance(null, Vector2.Zero);
+        private static EnemyManager instance = null;
+
+        public static EnemyManager getInstance(ContentManager content, SpriteBatch spriteBatch, Rectangle viewPort)
+        {
+            if (instance == null)
+                instance = new EnemyManager(content, spriteBatch, viewPort);
+            return instance;
+        }
 
         //Constructor
-        public EnemyManager(ContentManager content, SpriteBatch spriteBatch, Rectangle viewPort)
+        private EnemyManager(ContentManager content, SpriteBatch spriteBatch, Rectangle viewPort)
         {
-            //Initialize some useful stuff
             this.z_enemyShips = new List<IEnemyShip>();
             this.z_content = content;
             this.z_spriteBatch = spriteBatch;
             this.z_viewPort = viewPort;
-
-            //Populate the pool (Must come after content and viewport, but before populating enemies
-            this.z_enemyPool1 = new EnemyPool1(this.z_content, this.z_viewPort);
-
-            //Test the populateAnEnemy
             this.populateAnEnemy();
-
-            //Set other variables
             this.z_ActivateE1W1 = false;
             this.z_ActivateE1W2 = false;
             this.z_ActivateE1W3 = false;
@@ -63,7 +64,8 @@ namespace Space_Cats_V1._2
             this.z_interval = 0;
             this.z_EnemiesSpawn = 0;
 
-            
+            //Populate the pool
+            this.z_poolEnemy1 = new EnemyPool1(this.z_content, this.z_viewPort);
         }
 
 
@@ -102,10 +104,16 @@ namespace Space_Cats_V1._2
         //Populate a single enemy1 method
         private void populateAnEnemy()
         {
-            //this.z_enemyShips.Add(new Enemy1(this.z_content.Load<Texture2D>("Images\\EnemyShips\\EnemyShip1"), this.z_viewPort));
-            //this.z_enemyShips[0].setIsAlive(true);
+            this.z_enemyShips.Add(new Enemy1(this.z_content.Load<Texture2D>("Content\\Images\\EnemyShips\\EnemyShip1"), this.z_viewPort));
+            this.z_enemyShips[0].setIsAlive(true);
             //this.AddAnEnemy(ref this.z_poolEnemy1.borrowAnEnemy());
-            this.z_enemyShips.Add(this.z_enemyPool1.getNextAvailableEnemy());
+            //this.z_enemyShips.Add(this.z_poolEnemy1.borrowAnEnemy());
+            //this.z_enemyShips[0].setIsAlive(true);
+        }
+
+        private void AddAnEnemy(ref Enemy1 enemy)
+        {
+            this.z_enemyShips.Add(enemy);
             this.z_enemyShips[0].setIsAlive(true);
         }
 
@@ -117,8 +125,8 @@ namespace Space_Cats_V1._2
             {
                 if (this.z_EnemiesSpawn < 3)
                 {
-                    //this.z_enemyShips.Add(new Enemy1(this.z_content.Load<Texture2D>("Images\\EnemyShips\\EnemyShip1"), this.z_viewPort));
-                    this.z_enemyShips.Add(this.z_enemyPool1.getNextAvailableEnemy());
+                    this.z_enemyShips.Add(new Enemy1(this.z_content.Load<Texture2D>("Content\\Images\\EnemyShips\\EnemyShip1"), this.z_viewPort));
+                    //this.z_enemyShips.Add(this.z_poolEnemy1.borrowAnEnemy());
                     this.z_enemyShips.Last().setIsAlive(true);
                     this.z_EnemiesSpawn++;
                 }
@@ -139,7 +147,7 @@ namespace Space_Cats_V1._2
             {
                 if (this.z_EnemiesSpawn < 5)
                 {
-                    this.z_enemyShips.Add(this.z_enemyPool1.getNextAvailableEnemy());
+                    this.z_enemyShips.Add(this.z_poolEnemy1.getNextAvailableEnemy());
                     this.z_enemyShips.Last().setIsAlive(true);
                     this.z_EnemiesSpawn++;
                 }
@@ -160,7 +168,7 @@ namespace Space_Cats_V1._2
             {
                 if (this.z_EnemiesSpawn < 10)
                 {
-                    this.z_enemyShips.Add(this.z_enemyPool1.getNextAvailableEnemy());
+                    this.z_enemyShips.Add(this.z_poolEnemy1.getNextAvailableEnemy());
                     this.z_enemyShips.Last().setIsAlive(true);
                     this.z_EnemiesSpawn++;
                 }
@@ -194,6 +202,18 @@ namespace Space_Cats_V1._2
                     this.z_enemyShips.RemoveAt(i);
                     i--;
                 }
+
+
+            }
+
+            for (int i = 0; i < this.z_enemyShips.Count; i++)
+            {
+                //Check for collision with player ship
+                if (this.z_enemyShips[i].getHitRec().Intersects(playerShip.getHitRec()))
+                {
+                    this.z_enemyShips[i].setIsAlive(false);
+                    this.playerShip.setHealth(0);
+                }
             }
 
             if (this.z_ActivateE1W1)
@@ -202,6 +222,9 @@ namespace Space_Cats_V1._2
                 this.populateEnemy1Wave2(gameTime);
             if (this.z_ActivateE1W3)
                 this.populateEnemy1Wave3(gameTime);
+
+
+
 
         }
 
@@ -218,5 +241,16 @@ namespace Space_Cats_V1._2
         }
 
 
+        //Main reset
+        public void resetAllEnemies()
+        {
+            for(int i=0; i<this.z_enemyShips.Count;i++)
+            {
+                if (this.z_enemyShips[i] is Enemy1)
+                    ((Enemy1)this.z_enemyShips[i]).reset();
+
+            }
+
+        }
     }
 }

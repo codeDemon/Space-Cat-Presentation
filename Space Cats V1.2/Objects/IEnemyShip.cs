@@ -26,6 +26,7 @@ namespace Space_Cats_V1._2
         //Methods for isAvailable
         abstract public bool getIsAvailable();
         abstract public void setIsAvailable(bool isAvailable);
+        //abstract public bool readyToFire();
 
         
     }

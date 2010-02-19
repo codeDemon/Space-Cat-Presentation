@@ -44,16 +44,46 @@ namespace Space_Cats_V1._2
         private float z_InvincibleTimer;
         private float z_drawTimer;
         private Vector2 z_startingPosition;
-        private static PlayerShip instanceOf;
+        private static PlayerShip instanceOf = null;
+        public int score;
         #endregion
 
-
+        public static PlayerShip getInstance(Texture2D loadedSprite, Vector2 startingPosition)
+        {
+            if (instanceOf == null)
+                instanceOf = new PlayerShip(loadedSprite, startingPosition);
+            return instanceOf;
+        }
 
         #region Constructor
         //Constructor -----------------------------------------------------------------------------------     
-        public PlayerShip(Texture2D loadedSprite, Vector2 startingPosition)
+        private PlayerShip(Texture2D loadedSprite, Vector2 startingPosition)
             : base(loadedSprite)
         {
+            score = 0;
+            this.z_health = 100;
+            //IMPORTANT!! Acceleration must divide into maxSpeed evenly.
+            this.z_maxSpeed = 7.0f; // <--- Is this divisable
+            this.z_acceleration = 1.0f;// <-- By this?
+            //END-IMPORTANT
+            this.z_IsSlowingDownX = false;
+            this.z_IsSlowingDownY = false;
+            this.z_accelTimerX = 0;
+            this.z_accelTimerY = 0;
+            this.z_currentXstate = AccelerationState.zero;
+            this.z_currentYstate = AccelerationState.zero;
+            this.z_lives = 3;
+            this.z_IsInvincible = true;
+            this.z_InvincibleTimer = 0;
+            this.z_drawTimer = 0;
+            this.z_startingPosition = startingPosition;
+            this.setPosition(z_startingPosition);
+        }
+        #endregion
+
+        public void reset()
+        {
+            score = 0;
             this.z_health = 100;
             //IMPORTANT!! Acceleration must divide into maxSpeed evenly.
             this.z_maxSpeed = 4.9f; // <--- Is this divisable
@@ -65,16 +95,14 @@ namespace Space_Cats_V1._2
             this.z_accelTimerY = 0;
             this.z_currentXstate = AccelerationState.zero;
             this.z_currentYstate = AccelerationState.zero;
-            this.z_lives = 10;
+            this.z_lives = 3;
             this.z_IsInvincible = true;
             this.z_InvincibleTimer = 0;
             this.z_drawTimer = 0;
-            this.z_startingPosition = startingPosition;
             this.setPosition(z_startingPosition);
+            this.resetXvelocity();
+            this.resetYvelocity();
         }
-        #endregion
-
-
 
         #region Accessors
         //Accessor Methods ------------------------------------------------------------------------------
@@ -106,7 +134,7 @@ namespace Space_Cats_V1._2
                     {
                         return false;
                     }
-                default: return true; 
+                default: return true;
             }
         }
         public bool isAcceleratingY()
@@ -155,17 +183,17 @@ namespace Space_Cats_V1._2
         //Acceleration Methods ---------------------------------------------------------------------------------
         public void accelerateLeft()
         {
-            if (this.getVelocity().X > -1 * this.z_maxSpeed )
+            if (this.getVelocity().X > -1 * this.z_maxSpeed)
             {
                 if (this.z_IsSlowingDownX)
                     this.resetXvelocity();
                 this.setVelocity(new Vector2(this.getVelocity().X - this.z_acceleration, this.getVelocity().Y));
-                this.z_currentXstate = AccelerationState.negative;            
+                this.z_currentXstate = AccelerationState.negative;
             }
         }
         public void accelerateRight()
         {
-            if (this.getVelocity().X < this.z_maxSpeed )
+            if (this.getVelocity().X < this.z_maxSpeed)
             {
                 if (this.z_IsSlowingDownX)
                     this.resetXvelocity();
@@ -175,7 +203,7 @@ namespace Space_Cats_V1._2
         }
         public void accelerateUp()
         {
-            if (this.getVelocity().Y > -1 * this.z_maxSpeed )
+            if (this.getVelocity().Y > -1 * this.z_maxSpeed)
             {
                 if (this.z_IsSlowingDownY)
                     this.resetYvelocity();
@@ -185,7 +213,7 @@ namespace Space_Cats_V1._2
         }
         public void accelerateDown()
         {
-            if (this.getVelocity().Y < this.z_maxSpeed )
+            if (this.getVelocity().Y < this.z_maxSpeed)
             {
                 if (this.z_IsSlowingDownY)
                     this.resetYvelocity();
@@ -201,6 +229,7 @@ namespace Space_Cats_V1._2
         //The main Update Method for the Player Ship --------------------------------------------------------
         public void playerShipUpdate(GameTime gameTime, Rectangle viewPort)
         {
+            MissleManager.getCurrent().missleStartPosition = this.getPosition();
             //Check to see if the player is alive
             if (!this.getIsAlive())
             {
@@ -235,7 +264,7 @@ namespace Space_Cats_V1._2
             {
                 //While in Invincible/Recovery mode, ship can not collide
                 this.setHitRec(new Rectangle(0, 0, 0, 0));
-                if (this.z_InvincibleTimer > 3000)
+                if (this.z_InvincibleTimer > 500)
                 {
                     this.z_IsInvincible = false;
                     this.z_InvincibleTimer = 0;
@@ -247,28 +276,28 @@ namespace Space_Cats_V1._2
             else
                 this.setHitRec(new Rectangle((int)this.getPosition().X, (int)this.getPosition().Y,
                                              this.getSprite().Width, this.getSprite().Height));
-            
+
 
             //Ensure that the ship can not leave the viewPort ever
-            if((this.getPosition().X <= 1 && this.z_currentXstate == AccelerationState.negative) || 
-                (this.getPosition().X + this.getSprite().Width >= (float)viewPort.Width - 1 && 
+            if ((this.getPosition().X <= 1 && this.z_currentXstate == AccelerationState.negative) ||
+                (this.getPosition().X + this.getSprite().Width >= (float)viewPort.Width - 1 &&
                  this.z_currentXstate == AccelerationState.positive))
-                    this.resetXvelocity();
-            if((this.getPosition().Y <= 1 && this.z_currentYstate == AccelerationState.negative) || 
-               (this.getPosition().Y + this.getSprite().Height >= (float)viewPort.Height -1 &&
+                this.resetXvelocity();
+            if ((this.getPosition().Y <= 1 && this.z_currentYstate == AccelerationState.negative) ||
+               (this.getPosition().Y + this.getSprite().Height >= (float)viewPort.Height - 1 &&
                 this.z_currentYstate == AccelerationState.positive))
-                    this.resetYvelocity();
+                this.resetYvelocity();
 
             //Bring ship back to screen if ever necessary
             if (this.getPosition().X < 0)
-                    this.setPosition(new Vector2(0, this.getPosition().Y));
+                this.setPosition(new Vector2(0, this.getPosition().Y));
             if (this.getPosition().X + this.getSprite().Width > (float)viewPort.Width)
-                    this.setPosition(new Vector2(viewPort.Width - this.getSprite().Width, this.getPosition().Y));
-            if(this.getPosition().Y <0 )
-                    this.setPosition(new Vector2(this.getPosition().X, 0));
+                this.setPosition(new Vector2(viewPort.Width - this.getSprite().Width, this.getPosition().Y));
+            if (this.getPosition().Y < 0)
+                this.setPosition(new Vector2(this.getPosition().X, 0));
             if (this.getPosition().Y + this.getSprite().Height > (float)viewPort.Height)
-                    this.setPosition(new Vector2(this.getPosition().X, viewPort.Height - this.getSprite().Height));
-                
+                this.setPosition(new Vector2(this.getPosition().X, viewPort.Height - this.getSprite().Height));
+
             //Perform the actual update on the ship Object
             this.upDatePosition();
 
@@ -289,7 +318,7 @@ namespace Space_Cats_V1._2
                             {
                                 //We want to make X velocity more positive, until zero
                                 if (this.getVelocity().X < 0)
-                                    this.setVelocity(new Vector2(this.getVelocity().X + this.z_acceleration, 
+                                    this.setVelocity(new Vector2(this.getVelocity().X + this.z_acceleration,
                                                                  this.getVelocity().Y));
                                 else
                                     this.resetXvelocity();
@@ -299,7 +328,7 @@ namespace Space_Cats_V1._2
                             {
                                 //We want to make X velocity more negative, until zero
                                 if (this.getVelocity().X > 0)
-                                    this.setVelocity(new Vector2(this.getVelocity().X - this.z_acceleration, 
+                                    this.setVelocity(new Vector2(this.getVelocity().X - this.z_acceleration,
                                                                  this.getVelocity().Y));
                                 else
                                     this.resetXvelocity();
@@ -330,7 +359,7 @@ namespace Space_Cats_V1._2
                             {
                                 //We want to make Y velocity more positive, until zero
                                 if (this.getVelocity().Y < 0)
-                                    this.setVelocity(new Vector2(this.getVelocity().X, 
+                                    this.setVelocity(new Vector2(this.getVelocity().X,
                                                      this.getVelocity().Y + this.z_acceleration));
                                 else
                                     this.resetYvelocity();
@@ -340,7 +369,7 @@ namespace Space_Cats_V1._2
                             {
                                 //We want to make Y velocity more negative, until zero
                                 if (this.getVelocity().Y > 0)
-                                    this.setVelocity(new Vector2(this.getVelocity().X, 
+                                    this.setVelocity(new Vector2(this.getVelocity().X,
                                                                  this.getVelocity().Y - this.z_acceleration));
                                 else
                                     this.resetYvelocity();
@@ -392,13 +421,13 @@ namespace Space_Cats_V1._2
             {
                 if (this.z_drawTimer >= 0 && this.z_drawTimer < 100)
                 {
-                    spriteBatch.Draw(this.getSprite(), this.getPosition(), new Color(.8f,.8f,.8f,0.40f));
+                    spriteBatch.Draw(this.getSprite(), this.getPosition(), new Color(.8f, .8f, .8f, 0.40f));
                     this.z_drawTimer += gameTime.ElapsedGameTime.Milliseconds;
 
                 }
                 else if (this.z_drawTimer >= 100 && this.z_drawTimer < 200)
                 {
-                    spriteBatch.Draw(this.getSprite(), this.getPosition(), new Color(.8f,.8f,.8f,0.80f));
+                    spriteBatch.Draw(this.getSprite(), this.getPosition(), new Color(.8f, .8f, .8f, 0.80f));
                     this.z_drawTimer += gameTime.ElapsedGameTime.Milliseconds;
 
                 }

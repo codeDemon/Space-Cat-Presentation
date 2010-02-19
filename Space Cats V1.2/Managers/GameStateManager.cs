@@ -45,6 +45,8 @@ namespace Space_Cats_V1._2
         private LoadingScreen z_loadingScreen;
         private MainMenuScreen z_MainMenuScreen;
         private MissionScreen z_MissionScreen;
+        private StageManager z_StageManager;
+        private GameOverScreen z_GameOverScreen;
         private List<IScreenMenu> z_listScreen;
         private bool z_loadingManagerIsActive;
         //Declare Game Services
@@ -72,6 +74,7 @@ namespace Space_Cats_V1._2
             //Initialize States
             this.z_currentGameState = GameState.LoadingScreen;
             this.z_previousGameState = this.z_currentGameState;
+            this.z_StageManager = new StageManager(this.z_spriteBatch, this.z_viewPort, this.z_content);
 
             //Initialize Screens and Menus
             this.z_loadingScreen = new LoadingScreen(this.z_content.Load<Texture2D>("Content\\Screens\\LogoScreen"),
@@ -79,6 +82,7 @@ namespace Space_Cats_V1._2
             this.z_titleScreen = new TitleScreen(this.z_viewPort);
             this.z_MainMenuScreen = new MainMenuScreen(this.z_viewPort);
             this.z_MissionScreen = new MissionScreen(this.z_viewPort);
+            this.z_GameOverScreen = new GameOverScreen(this.z_viewPort);
 
             this.z_listScreen = new List<IScreenMenu>();
 
@@ -93,6 +97,7 @@ namespace Space_Cats_V1._2
             this.z_listScreen.Add(this.z_titleScreen);
             this.z_listScreen.Add(this.z_MainMenuScreen);
             this.z_listScreen.Add(this.z_MissionScreen);
+            this.z_listScreen.Add(this.z_GameOverScreen);
         }
 
 
@@ -159,7 +164,7 @@ namespace Space_Cats_V1._2
 
         //Some Important Methods for the states
         public void UpdateKeyBoard(KeyboardState currentKeyState, KeyboardState previousKeyState, 
-                                   GameTime gameTime)
+                                   GameTime gameTime, GamePadState currentPadState, GamePadState previousPadState)
         {
             this.z_gameTime = gameTime;
             //States will change into other states based on input
@@ -239,6 +244,7 @@ namespace Space_Cats_V1._2
                                                     //this.z_previousGameState = this.z_currentGameState;
                                                     this.z_currentGameState = GameState.MissionMenu;
                                                     this.z_MissionScreen.setCurrentState(MissionScreen.MissionMenuState.Mission1);
+
                                                     break;
                                                 }
                                             case MainMenuScreen.MainMenuState.Ship:
@@ -288,7 +294,7 @@ namespace Space_Cats_V1._2
                                         {
                                             case MissionScreen.MissionMenuState.Mission1:
                                                 {
-
+                                                    this.z_currentGameState = GameState.PlayingGame;
 
                                                     break;
                                                 }
@@ -346,10 +352,14 @@ namespace Space_Cats_V1._2
                     }
                 case GameState.PlayingGame:
                     {
+                        
+                        this.z_StageManager.Update(currentKeyState, currentPadState, previousKeyState, previousPadState, gameTime);
 
-
-
-
+                        if (this.z_StageManager.getIsGameOver())
+                        {
+                            this.z_StageManager.mainReset();
+                            this.z_currentGameState = GameState.GameOverScreen;
+                        }
 
                         break;
                     }
@@ -363,7 +373,8 @@ namespace Space_Cats_V1._2
                     }
                 case GameState.GameOverScreen:
                     {
-
+                        if(currentKeyState.IsKeyDown(Keys.Enter))
+                            this.z_currentGameState = GameState.MainMenu;
 
 
                         break;
@@ -398,6 +409,16 @@ namespace Space_Cats_V1._2
                 case GameState.MissionMenu:
                     {
                         this.z_MissionScreen.Draw(spriteBatch);
+                        break;
+                    }
+                case GameState.PlayingGame:
+                    {
+                        this.z_StageManager.Draw(gametime);
+                        break;
+                    }
+                case GameState.GameOverScreen:
+                    {
+                        this.z_GameOverScreen.Draw(spriteBatch);
                         break;
                     }
             }

@@ -19,6 +19,8 @@ namespace Space_Cats_V1._2
         //Instance Variables
         private AI_ZigZag z_AI;
         private bool z_isAvailable;
+        public float fireTime;
+        public float fireCoolOff;
 
         //Constructor
         public Enemy1(Texture2D loadedSprite, Rectangle viewPort)
@@ -27,6 +29,8 @@ namespace Space_Cats_V1._2
             z_AI = new AI_ZigZag(viewPort);
             this.setPosition(this.z_AI.getStartingPosition());
             this.z_isAvailable = true;
+            this.fireTime = 0;
+            this.fireCoolOff = 1000;
         }
 
         //Accessors
@@ -45,6 +49,14 @@ namespace Space_Cats_V1._2
 
         public override void AIUpdate(GameTime gameTime)
         {
+            Random gen = new Random();
+            float time = (float)gameTime.TotalGameTime.TotalMilliseconds;
+            if (time > fireTime)
+            {
+                fireTime = time + this.fireCoolOff;
+                MissleManager.getCurrent().fireEnemyMissle(this.getPosition(), this.getSprite());
+            }
+            this.fireCoolOff = MathHelper.Lerp(1000, 5000, (float)gen.NextDouble());
             if (this.z_AI.okToRemove())
             {
                 this.setIsAlive(false);
@@ -54,6 +66,8 @@ namespace Space_Cats_V1._2
             this.setVelocity(this.z_AI.calculateNewVelocity(this.getPosition(), gameTime));
 
             this.upDatePosition();
+            this.setHitRec(new Rectangle((int)this.getPosition().X, (int)this.getPosition().Y,
+                          (int)this.getSprite().Width, (int)this.getSprite().Height));
         }
 
         public override bool getIsAvailable()
@@ -66,5 +80,16 @@ namespace Space_Cats_V1._2
             this.z_isAvailable = isAvailable;
         }
 
+        public void reset()
+        {
+            this.setPosition(Vector2.Zero);
+            this.setVelocity(Vector2.Zero);
+            this.setSpeed(1.0f);
+            this.setIsAlive(false);
+            this.setHitRec(new Rectangle(0, 0, 0, 0));
+            this.setIsKillerObject(false);
+            this.setIsPickUp(false);
+            this.z_isAvailable = true;
+        }
     }
 }
