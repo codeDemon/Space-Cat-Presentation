@@ -79,14 +79,21 @@ namespace Space_Cats_V1._2
             //this.z_graphics.PreferredBackBufferWidth = 1280;
             //this.z_graphics.PreferredBackBufferHeight = 720;
 
+<<<<<<< HEAD
             this.z_graphics.IsFullScreen = false;
+=======
+            this.z_graphics.IsFullScreen = true;
+>>>>>>> d1444e7ddd3444dc67ccd4e784e5757f716205f1
             this.z_graphics.SynchronizeWithVerticalRetrace = true;
 
             Content.RootDirectory = "Content";
             //Adds the xbox live Profile Service to the game
             this.Components.Add(new GamerServicesComponent(this));
             this.Components.Add(this.z_audioManager);
+<<<<<<< HEAD
             Components.Add(new FrameRateCounter(this));
+=======
+>>>>>>> d1444e7ddd3444dc67ccd4e784e5757f716205f1
         }
 
         void Window_ClientSizeChanged(object sender, EventArgs e)

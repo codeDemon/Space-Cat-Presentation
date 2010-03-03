@@ -23,7 +23,11 @@ namespace Space_Cats_V1._2
             : base(MissleSprite, playersLocation, spriteBatch)
         {
             this.setVelocity(new Vector2(0, -1));
+<<<<<<< HEAD
             this.setSpeed(7);
+=======
+            this.setSpeed(5);
+>>>>>>> d1444e7ddd3444dc67ccd4e784e5757f716205f1
             this.setIsAlive(true);
             this.isAvailable = true;
         }

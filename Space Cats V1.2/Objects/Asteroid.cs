@@ -18,12 +18,18 @@ namespace Space_Cats_V1._2
     {
         //Instance Variables
         private Vector2 z_center;
+<<<<<<< HEAD
         private Vector2 z_centerPosition;
         private float z_rotation;
         private float z_rotationSpeed;
         private bool z_hasBeenhit;
         //Use circle for collision detection
         private Circle z_hitCircle;
+=======
+        private float z_rotation;
+        private float z_rotationSpeed;
+        private bool z_hasBeenhit;
+>>>>>>> d1444e7ddd3444dc67ccd4e784e5757f716205f1
 
 
         //Constructor
@@ -55,10 +61,13 @@ namespace Space_Cats_V1._2
         {
             return this.z_hasBeenhit;
         }
+<<<<<<< HEAD
         public Circle getHitCircle()
         {
             return this.z_hitCircle;
         }
+=======
+>>>>>>> d1444e7ddd3444dc67ccd4e784e5757f716205f1
 
         //Mutator Methods
         public void setCenter(Vector2 newCenter)
@@ -77,23 +86,31 @@ namespace Space_Cats_V1._2
         {
             this.z_hasBeenhit = newBool;
         }
+<<<<<<< HEAD
         public void setAstroPosition(Vector2 newPosition)
         {
             this.z_centerPosition = newPosition;
             this.z_hitCircle = new Circle(this.z_centerPosition, ((float)((this.getSprite().Width / 2) + (this.getSprite().Height / 2)) / 2));
             this.setPosition(newPosition);
         }
+=======
+>>>>>>> d1444e7ddd3444dc67ccd4e784e5757f716205f1
 
         //Asteroid Update Method
         public void AstroUpdate()
         {
             this.z_rotation += this.z_rotationSpeed;
             this.upDatePositionWithSpeed();
+<<<<<<< HEAD
             if (this.z_centerPosition != null)
             {
                 this.z_centerPosition += this.getVelocityWithSpeed();
                 this.z_hitCircle.setCenter(this.z_centerPosition);
             }
+=======
+            this.setHitRec(new Rectangle((int)this.getPosition().X, (int)this.getPosition().Y,
+                                         this.getSprite().Width, this.getSprite().Height));
+>>>>>>> d1444e7ddd3444dc67ccd4e784e5757f716205f1
         }
 
     }

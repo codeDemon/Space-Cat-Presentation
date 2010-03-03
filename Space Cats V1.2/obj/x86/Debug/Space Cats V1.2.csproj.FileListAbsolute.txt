@@ -127,6 +127,7 @@ C:\Users\David\Desktop\codeDemon-Space-Cat-GameStateManager-b1126fc\codeDemon-Sp
 C:\Users\David\Desktop\codeDemon-Space-Cat-GameStateManager-b1126fc\codeDemon-Space-Cat-GameStateManager-b1126fc\Space Cats V1.2\bin\x86\Debug\Content\Images\ship1.xnb
 C:\Users\David\Desktop\codeDemon-Space-Cat-GameStateManager-b1126fc\codeDemon-Space-Cat-GameStateManager-b1126fc\Space Cats V1.2\bin\x86\Debug\Content\Screens\LogoScreen2.xnb
 C:\Users\David\Desktop\codeDemon-Space-Cat-GameStateManager-b1126fc\codeDemon-Space-Cat-GameStateManager-b1126fc\Space Cats V1.2\bin\x86\Debug\Content\Screens\ArrowSelection2.xnb
+<<<<<<< HEAD
 C:\Documents and Settings\David\Desktop\codeDemon-Space-Cat-Presentation-d1444e7\Space Cats V1.2\bin\x86\Debug\Content\Audio\Music\ATreeFalls.xnb
 C:\Documents and Settings\David\Desktop\codeDemon-Space-Cat-Presentation-d1444e7\Space Cats V1.2\bin\x86\Debug\Content\Audio\Music\Beautiful_Darkness.xnb
 C:\Documents and Settings\David\Desktop\codeDemon-Space-Cat-Presentation-d1444e7\Space Cats V1.2\bin\x86\Debug\Content\Audio\Music\Mark Oleson - All Good Things WIP1.xnb
@@ -195,3 +196,5 @@ C:\Documents and Settings\David\Desktop\codeDemon-Space-Cat-Presentation-d1444e7
 C:\Documents and Settings\David\Desktop\codeDemon-Space-Cat-Presentation-d1444e7\Space Cats V1.2\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Documents and Settings\David\Desktop\codeDemon-Space-Cat-Presentation-d1444e7\Space Cats V1.2\obj\x86\Debug\Space Cats V1.2.exe
 C:\Documents and Settings\David\Desktop\codeDemon-Space-Cat-Presentation-d1444e7\Space Cats V1.2\obj\x86\Debug\Space Cats V1.2.pdb
+=======
+>>>>>>> d1444e7ddd3444dc67ccd4e784e5757f716205f1

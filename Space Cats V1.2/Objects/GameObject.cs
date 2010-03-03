@@ -56,11 +56,14 @@ namespace Space_Cats_V1._2
         {
             return this.z_velocity;
         }
+<<<<<<< HEAD
         public Vector2 getVelocityWithSpeed()
         {
             return new Vector2(this.z_velocity.X * this.z_speed,
                                            this.z_velocity.Y * this.z_speed);
         }
+=======
+>>>>>>> d1444e7ddd3444dc67ccd4e784e5757f716205f1
         public bool getIsAlive()
         {
             return this.z_isAlive;

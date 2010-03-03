@@ -90,11 +90,17 @@
   <ItemGroup>
     <Compile Include="AI\AI_ZigZag.cs" />
     <Compile Include="BulletPool1.cs" />
+<<<<<<< HEAD
     <Compile Include="Circle.cs" />
     <Compile Include="EnemyBulletPool1.cs" />
     <Compile Include="EnemyMissle1.cs" />
     <Compile Include="EnemyPool1.cs" />
     <Compile Include="FrameRateCounter.cs" />
+=======
+    <Compile Include="EnemyBulletPool1.cs" />
+    <Compile Include="EnemyMissle1.cs" />
+    <Compile Include="EnemyPool1.cs" />
+>>>>>>> d1444e7ddd3444dc67ccd4e784e5757f716205f1
     <Compile Include="GameOverScreen.cs" />
     <Compile Include="Screens+Menus\MissionScreen.cs" />
     <Compile Include="Screens+Menus\MainMenuScreen.cs" />

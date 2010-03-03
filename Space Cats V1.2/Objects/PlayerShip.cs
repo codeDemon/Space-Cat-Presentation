@@ -264,7 +264,11 @@ namespace Space_Cats_V1._2
             {
                 //While in Invincible/Recovery mode, ship can not collide
                 this.setHitRec(new Rectangle(0, 0, 0, 0));
+<<<<<<< HEAD
                 if (this.z_InvincibleTimer > 1000)
+=======
+                if (this.z_InvincibleTimer > 500)
+>>>>>>> d1444e7ddd3444dc67ccd4e784e5757f716205f1
                 {
                     this.z_IsInvincible = false;
                     this.z_InvincibleTimer = 0;
@@ -275,7 +279,11 @@ namespace Space_Cats_V1._2
             }
             else
                 this.setHitRec(new Rectangle((int)this.getPosition().X, (int)this.getPosition().Y,
+<<<<<<< HEAD
                                              (int)(this.getSprite().Width * .7), (int)(this.getSprite().Height*.9)));
+=======
+                                             this.getSprite().Width, this.getSprite().Height));
+>>>>>>> d1444e7ddd3444dc67ccd4e784e5757f716205f1
 
 
             //Ensure that the ship can not leave the viewPort ever

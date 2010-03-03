@@ -136,7 +136,11 @@ namespace Space_Cats_V1._2
             {
                 this.z_asteroidHolder[i] = new Asteroid(z_content.Load<Texture2D>
                                                         ("Content\\Images\\Asteroids\\Asteroid" + this.getRandomImage()));
+<<<<<<< HEAD
                 this.z_asteroidHolder[i].setAstroPosition(new Vector2(this.getRandomWidth(), this.getRandomHeight()));
+=======
+                this.z_asteroidHolder[i].setPosition(new Vector2(this.getRandomWidth(), this.getRandomHeight()));
+>>>>>>> d1444e7ddd3444dc67ccd4e784e5757f716205f1
                 this.z_asteroidHolder[i].setSpeed(this.getRandomSpeed());
                 this.z_asteroidHolder[i].setRotationSpeed(this.getRandomRotationSpeed());
             }
@@ -168,7 +172,11 @@ namespace Space_Cats_V1._2
                     //Might cause game lag**
                     asteroid.setSprite(z_content.Load<Texture2D>
                                        ("Content\\Images\\Asteroids\\Asteroid" + this.getRandomImage()));
+<<<<<<< HEAD
                     asteroid.setAstroPosition(new Vector2(this.getRandomWidth(), this.getRandomHeight()));
+=======
+                    asteroid.setPosition(new Vector2(this.getRandomWidth(), this.getRandomHeight()));
+>>>>>>> d1444e7ddd3444dc67ccd4e784e5757f716205f1
                     asteroid.setSpeed(this.getRandomSpeed());
                     //Because The rotation is perfectly centered, asteroids that move slow look really
                     //Off balance. So instead I'm temporarily scaling rotation speed with the asteroids traveling speed
@@ -178,7 +186,11 @@ namespace Space_Cats_V1._2
                 }
 
                 //If an asteroid has hit the player, then do something
+<<<<<<< HEAD
                 if (asteroid.getHitCircle().intersects((playerShip.getHitRec())))
+=======
+                if (asteroid.getHitRec().Intersects(playerShip.getHitRec()))
+>>>>>>> d1444e7ddd3444dc67ccd4e784e5757f716205f1
                 {
                     asteroid.sethasBeenHit(true);
                     playerShip.setHealth(0);
